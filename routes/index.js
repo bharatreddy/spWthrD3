@@ -4,5 +4,10 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'SpaceWeather' });
+
+    res.render('index', 
+                { 
+                title: 'Space Weather'
+                }
+    );
 };
