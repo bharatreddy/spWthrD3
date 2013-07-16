@@ -3,14 +3,6 @@ window.onload = function () {
   var allDataDtStrt = new Date("January 01, 2000 00:00:00");
   var allDataDtEnd = new Date("December 31, 2012 24:00:00");
 
-  loadData(allDataDtStrt, allDataDtEnd);
-}
-
-
-var datDst;
-
-function loadData(dm10, dp10, hemi_choice) {
-
 var margin = {top: 10, right: 10, bottom: 100, left: 40},
     margin2 = {top: 430, right: 10, bottom: 20, left: 40},
     width = 960 - margin.left - margin.right,
@@ -49,7 +41,8 @@ var area2 = d3.svg.area()
     .y0(height2)
     .y1(function(d) { return y2(d.dst); });
 
-var svg = d3.select("body").append("svg")
+d3.select(".map").selectAll("svg").remove();
+var svg = d3.select(".swDst").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
 
@@ -127,4 +120,10 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .attr("height", height2 + 7);
 });
 
+}
+
+function brushed() {
+  x.domain(brush.empty() ? x2.domain() : brush.extent());
+  focus.select("path").attr("d", area);
+  focus.select(".x.axis").call(xAxis);
 }
