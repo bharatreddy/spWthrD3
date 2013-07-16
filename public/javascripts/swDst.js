@@ -91,8 +91,6 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
             return d
       });
 
-     }
-
   x.domain(d3.extent(datDst.map(function(d) { return d.date; })));
   y.domain([0, d3.max(datDst.map(function(d) { return d.dst; }))]);
   x2.domain(x.domain());
@@ -128,21 +126,5 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .attr("y", -6)
       .attr("height", height2 + 7);
 });
-
-function brushed() {
-  x.domain(brush.empty() ? x2.domain() : brush.extent());
-  focus.select("path").attr("d", area);
-  focus.select(".x.axis").call(xAxis);
-}
-
-
-
-
-
-
-
-
-
-
 
 }
