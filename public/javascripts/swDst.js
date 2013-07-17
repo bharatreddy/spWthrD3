@@ -148,12 +148,14 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .attr("height", height2 + 7);
 });
 
+	function brushed() {
+
+	  x.domain(brush.empty() ? x2.domain() : brush.extent());
+	  focus.select("path").attr("d", line);
+	  focus.select(".x.axis").call(xAxis);
+	}
+
 }
 
 
-function brushed() {
 
-  x.domain(brush.empty() ? x2.domain() : brush.extent());
-  focus.select("path").attr("d", line);
-  focus.select(".x.axis").call(xAxis);
-}
