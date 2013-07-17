@@ -1,7 +1,11 @@
 window.onload = function () {
 
-  var allDataDtStrt = new Date("January 01, 2000 00:00:00");
-  var allDataDtEnd = new Date("December 31, 2012 24:00:00");
+
+  //var tdy = new Date();
+  //var allDataDtStrt = new Date( new Date(tdy).setDate(tdy.getDate() - 1500) );
+  //var allDataDtEnd = new Date( new Date(tdy).setDate(tdy.getDate() - 1000) );
+  var allDataDtStrt = new Date("January 1, 2008 00:00:00")//new Date(2000,1,1,0);
+  var allDataDtEnd = new Date("December 31, 2012 23:00:00")//new Date(2012,12,31,23);
 
 var margin = {top: 10, right: 10, bottom: 100, left: 40},
     margin2 = {top: 430, right: 10, bottom: 20, left: 40},
@@ -35,13 +39,23 @@ var area = d3.svg.area()
     .y0(height)
     .y1(function(d) { return y(d.dst); });
 
+var line = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.dst); });
+
+
+var line2 = d3.svg.line()
+	.interpolate("monotone")
+    .x(function(d) { return x2(d.date); })
+    .y(function(d) { return y2(d.dst); });
+
 var area2 = d3.svg.area()
     .interpolate("monotone")
     .x(function(d) { return x2(d.date); })
     .y0(height2)
     .y1(function(d) { return y2(d.dst); });
 
-d3.select(".map").selectAll("svg").remove();
+d3.select(".swDst").selectAll("svg").remove();
 var svg = d3.select(".swDst").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
@@ -58,15 +72,10 @@ var focus = svg.append("g")
 var context = svg.append("g")
     .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
-// d3.csv("sp500.csv", function(error, data) {
-
-//   data.forEach(function(d) {
-//     d.date = parseDate(d.date);
-//     d.dst = +d.dst;
-//   });
-
 
 // Read data from the mongodb database....
+
+var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
 
 d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       , "application/json"
@@ -75,24 +84,33 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       if (!error) {
           var data = JSON.parse(xhrRes.response);
       } else {
+      	  console.log('here');
           console.log(error);
       }
 
-      datDst = data.filter( function(d) {
-            d.time = new Date(d.time);
+      var datDst = data.filter( function(d) {
+     
+            d.date = new Date(d.time);
             d.dst = +d.dst;
+
             return d
       });
 
+
+     //  datDst.forEach(function(d) {
+     //      d.date = parseDate(d.time);
+     //      d.dst = +d.dst;
+  	  // });
+
   x.domain(d3.extent(datDst.map(function(d) { return d.date; })));
-  y.domain([0, d3.max(datDst.map(function(d) { return d.dst; }))]);
+  y.domain([d3.min(datDst.map(function(d) { return d.dst; })), d3.max(datDst.map(function(d) { return d.dst; }))]);
   x2.domain(x.domain());
   y2.domain(y.domain());
 
   focus.append("path")
       .datum(datDst)
       .attr("clip-path", "url(#clip)")
-      .attr("d", area);
+      .attr("d", line);
 
   focus.append("g")
       .attr("class", "x axis")
@@ -103,9 +121,19 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .attr("class", "y axis")
       .call(yAxis);
 
+  focus.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "-2.71em")
+      .style("text-anchor", "end")
+      .text("Dst-Index [nT]");
+
   context.append("path")
       .datum(datDst)
-      .attr("d", area2);
+      .attr("d", line2);
 
   context.append("g")
       .attr("class", "x axis")
@@ -122,8 +150,10 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
 
 }
 
+
 function brushed() {
+
   x.domain(brush.empty() ? x2.domain() : brush.extent());
-  focus.select("path").attr("d", area);
+  focus.select("path").attr("d", line);
   focus.select(".x.axis").call(xAxis);
 }

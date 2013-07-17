@@ -9,6 +9,7 @@ exports.getData = function(req, res){
     var sdt = new Date(req.query.sdt);
     var edt = new Date(req.query.edt);
 
+    console.log(sdt, edt)
     require('mongodb').MongoClient.connect(dbloc, function(err, db) {
 
         if(!err) {
