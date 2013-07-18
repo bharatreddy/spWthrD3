@@ -1,5 +1,5 @@
 body {
-  background: rgb(88,88,88);
+  background: rgb(56,56,56);
   color: #888;
   font: 13px Helvetica, arial, freesans, clean, sans-serif;
   line-height: 1.4;
@@ -24,8 +24,8 @@ a hover {
 .title {
   position: absolute;
   font-size: 25px;
-  color: #538AF7;
-  bottom: 1150px;
+  color: #F5FBEF;
+  bottom: 1400px;
   left: 300px;
   text-align: left;
   vertical-align: top;
@@ -38,12 +38,12 @@ a hover {
 }
 
 .content {
-  width: 1200px;
-  height: 1200px;
+  width: 1400px;
+  height: 1400px;
   text-align: left;
   position: absolute;
   left: 20%;
-  bottom: -30%
+  bottom: -60%
 }
 
 #loading {
@@ -187,10 +187,10 @@ a hover {
   fill: rgba(100,100,100,0.5);
 }
 
-
-
-path {
-  fill: #087EF3;
+.line {
+  fill: url(#temperature-gradient);
+  stroke: url(#temperature-gradient);
+  stroke-width: 1.5px;
 }
 
 .axis path,
@@ -265,7 +265,9 @@ circle.selected {
 }
 
 footer {
+  color: #087EF3; 	
   position: absolute;
   text-align: left;
-  bottom: 5px;
+  bottom: 300px;
+  left: 325px;
 }

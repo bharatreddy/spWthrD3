@@ -1,14 +1,14 @@
 window.onload = function () {
 
-
+  
   //var tdy = new Date();
   //var allDataDtStrt = new Date( new Date(tdy).setDate(tdy.getDate() - 1500) );
   //var allDataDtEnd = new Date( new Date(tdy).setDate(tdy.getDate() - 1000) );
-  var allDataDtStrt = new Date("January 1, 2010 00:00:00")//new Date(2000,1,1,0);
+  var allDataDtStrt = new Date("January 1, 2012 00:00:00")//new Date(2000,1,1,0);
   var allDataDtEnd = new Date("December 31, 2012 23:00:00")//new Date(2012,12,31,23);
 
 var margin = {top: 10, right: 10, bottom: 100, left: 40},
-    margin2 = {top: 430, right: 10, bottom: 20, left: 40},
+    margin2 = {top: 430, right: 10, bottom: 20, left: 40}, 
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
     height2 = 500 - margin2.top - margin2.bottom;
@@ -40,14 +40,19 @@ var area = d3.svg.area()
     .y1(function(d) { return y(d.dst); });
 
 var line = d3.svg.line()
+    .interpolate("basis")
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.dst); });
-
 
 var line2 = d3.svg.line()
 	.interpolate("monotone")
     .x(function(d) { return x2(d.date); })
     .y(function(d) { return y2(d.dst); });
+
+
+var n = 0 // num of layers
+var color = d3.scale.linear()
+    .range(["#aad", "#556"]);
 
 var area2 = d3.svg.area()
     .interpolate("monotone")
@@ -60,11 +65,20 @@ var svg = d3.select(".swDst").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
 
-svg.append("defs").append("clipPath")
-    .attr("id", "clip")
-  .append("rect")
-    .attr("width", width)
-    .attr("height", height);
+svg.append("linearGradient")
+      .attr("id", "temperature-gradient")
+      .attr("gradientUnits", "userSpaceOnUse")
+      .attr("x1", "0%").attr("y1", "0%")
+      .attr("x2", "0%").attr("y2", "65%")
+    .selectAll("stop")
+      .data([
+        {offset: "0%", color: "green"},
+        {offset: "50%", color: "yellow"},
+        {offset: "100%", color: "red"}
+      ])
+    .enter().append("stop")
+      .attr("offset", function(d) { return d.offset; })
+      .attr("stop-color", function(d) { return d.color; });
 
 var focus = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -91,8 +105,11 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       var datDst = data.filter( function(d) {
      
             d.date = new Date(d.time);
+            if ( d.dst > -15 ) {d.colVal = "green";}
+            else if ( d.dst <= -15 && d.dst > -50 ) {d.colVal = "yellow";}
+            else {d.colVal = "red";}
             d.dst = +d.dst;
-
+            
             return d
       });
 
@@ -110,6 +127,7 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
   focus.append("path")
       .datum(datDst)
       .attr("clip-path", "url(#clip)")
+      .attr("class", "line")
       .attr("d", line);
 
   focus.append("g")
@@ -133,7 +151,8 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
 
   context.append("path")
       .datum(datDst)
-      .attr("d", line2);
+      .attr("d", line2)
+      .style("fill", "crimson");
 
   context.append("g")
       .attr("class", "x axis")
