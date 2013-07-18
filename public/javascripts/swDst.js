@@ -4,7 +4,7 @@ window.onload = function () {
   //var tdy = new Date();
   //var allDataDtStrt = new Date( new Date(tdy).setDate(tdy.getDate() - 1500) );
   //var allDataDtEnd = new Date( new Date(tdy).setDate(tdy.getDate() - 1000) );
-  var allDataDtStrt = new Date("January 1, 2008 00:00:00")//new Date(2000,1,1,0);
+  var allDataDtStrt = new Date("January 1, 2010 00:00:00")//new Date(2000,1,1,0);
   var allDataDtEnd = new Date("December 31, 2012 23:00:00")//new Date(2012,12,31,23);
 
 var margin = {top: 10, right: 10, bottom: 100, left: 40},
