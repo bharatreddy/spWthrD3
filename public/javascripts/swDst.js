@@ -105,9 +105,6 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       var datDst = data.filter( function(d) {
      
             d.date = new Date(d.time);
-            if ( d.dst > -15 ) {d.colVal = "green";}
-            else if ( d.dst <= -15 && d.dst > -50 ) {d.colVal = "yellow";}
-            else {d.colVal = "red";}
             d.dst = +d.dst;
             
             return d
@@ -120,7 +117,7 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
   	  // });
 
   x.domain(d3.extent(datDst.map(function(d) { return d.date; })));
-  y.domain([d3.min(datDst.map(function(d) { return d.dst; })), d3.max(datDst.map(function(d) { return d.dst; }))]);
+  y.domain([d3.min(datDst.map(function(d) { return d.dst; })), 100]);
   x2.domain(x.domain());
   y2.domain(y.domain());
 
@@ -149,6 +146,26 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .style("text-anchor", "end")
       .text("Dst-Index [nT]");
 
+
+  var focusmouse = svg.append("g")
+      .attr("class", "focus")
+      .style("display", "none");
+
+  focusmouse.append("circle")
+      .attr("r", 4.5);
+
+  focusmouse.append("text")
+      .attr("x", 9)
+      .attr("dy", ".35em");
+
+  svg.append("rect")
+      .attr("class", "overlay")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mouseover", function() { focusmouse.style("display", null); })
+      .on("mouseout", function() { focusmouse.style("display", "none"); })
+      .on("mousemove", mousemove);
+
   context.append("path")
       .datum(datDst)
       .attr("d", line2)
@@ -165,6 +182,30 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
     .selectAll("rect")
       .attr("y", -6)
       .attr("height", height2 + 7);
+
+
+  
+
+  var bisectDate = d3.bisector(function(d) { return d.date; }).left,
+      formatDstVal = function(d) { return "Dst : " + String(d.dst) + " nT"; };
+
+  function mousemove() {
+    var x0 = x.invert(d3.mouse(this)[0]),
+        dataMouseOver = datDst.map(function(d) { return d; })
+        i = bisectDate(dataMouseOver, x0, 1),
+        d0 = dataMouseOver[i - 1],
+        d1 = dataMouseOver[i],
+        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+    
+    focusmouse.attr("transform", "translate(" + x(d.date) + "," + 90 + ")");
+    focusmouse.select("text").text("Dst : " + String(d.dst) + " nT, date : " + d.date );
+  }
+
+
+
+
+
+
 });
 
 	function brushed() {

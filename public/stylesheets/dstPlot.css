@@ -218,19 +218,20 @@ g text {
   fill: crimson;
 }
 
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
+
 .circles-scraftB {
   fill: steelblue;
 }
 
-circle {
-  cursor: crosshair;
-}
-
-circle.selected {
-  fill: #000;
-  stroke: #444;
-  stroke-width: 2px;
-}
 
 .left-content {
   display: none;
