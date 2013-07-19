@@ -25,7 +25,7 @@ a hover {
   position: absolute;
   font-size: 25px;
   color: #F5FBEF;
-  bottom: 1400px;
+  bottom: 1200px;
   left: 300px;
   text-align: left;
   vertical-align: top;
@@ -39,11 +39,11 @@ a hover {
 
 .content {
   width: 1400px;
-  height: 1400px;
+  height: 1200px;
   text-align: left;
   position: absolute;
   left: 20%;
-  bottom: -60%
+  bottom: -40%
 }
 
 #loading {
@@ -224,7 +224,7 @@ g text {
 }
 
 .focus circle {
-  fill: none;
+  fill: red;
   stroke: steelblue;
 }
 
@@ -269,6 +269,6 @@ footer {
   color: #087EF3; 	
   position: absolute;
   text-align: left;
-  bottom: 300px;
+  bottom: 275px;
   left: 325px;
 }

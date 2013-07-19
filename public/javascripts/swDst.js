@@ -151,8 +151,13 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .attr("class", "focus")
       .style("display", "none");
 
-  focusmouse.append("circle")
-      .attr("r", 4.5);
+
+  focusmouse.append("line")
+       .attr("stroke", "green")
+       .attr("stroke-width", 3)
+       .attr("y1", 300)
+       .attr("y2", -100);
+  
 
   focusmouse.append("text")
       .attr("x", 9)
@@ -184,10 +189,12 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .attr("height", height2 + 7);
 
 
-  
+  var lineFunc = d3.svg.line()
+      .x(function(d) { return d.date; })
+      .y(function(d) { return d.dst; })
+      .interpolate("linear");
 
-  var bisectDate = d3.bisector(function(d) { return d.date; }).left,
-      formatDstVal = function(d) { return "Dst : " + String(d.dst) + " nT"; };
+  var bisectDate = d3.bisector(function(d) { return d.date; }).left;
 
   function mousemove() {
     var x0 = x.invert(d3.mouse(this)[0]),
@@ -197,8 +204,11 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
         d1 = dataMouseOver[i],
         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
     
-    focusmouse.attr("transform", "translate(" + x(d.date) + "," + 90 + ")");
-    focusmouse.select("text").text("Dst : " + String(d.dst) + " nT, date : " + d.date );
+
+   focusmouse.attr("transform", "translate(" + x(d.date) + "," + 90 + ")");
+   focusmouse.select("text").text("Dst : " + String(d.dst) + " nT, date : " + d.date );
+    
+
   }
 
 
