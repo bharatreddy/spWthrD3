@@ -89,6 +89,12 @@ window.onload = function () {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom);
 
+
+
+  var userAgent = navigator.userAgent.toString().toLowerCase();
+  var browserChromeIndex = userAgent.indexOf('chrome')
+  
+  
   svg.append("linearGradient")
         .attr("id", "temperature-gradient")
         .attr("gradientUnits", "userSpaceOnUse")
@@ -144,13 +150,22 @@ window.onload = function () {
     y.domain([d3.min(datDst.map(function(d) { return d.dst; })), d3.max(datDst.map(function(d) { return d.dst; }))]);
     x2.domain(x.domain());
     y2.domain(y.domain());
+    
 
-    focus.append("path")
-        .datum(datDst)
-        .attr("clip-path", "url(#clip)")
-        .attr("class", "line")
-        .attr("d", line);
+    if ( browserChromeIndex != -1) {
 
+      focus.append("path")
+          .datum(datDst)
+          .attr("clip-path", "url(#clip)")
+          .attr("class", "line")
+          .attr("d", line);
+    } else {focus.append("path")
+          .datum(datDst)
+          .attr("clip-path", "url(#clip)")
+          .attr("class", "lineNoChrome")
+          .attr("d", line);
+    }
+   
     focus.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")

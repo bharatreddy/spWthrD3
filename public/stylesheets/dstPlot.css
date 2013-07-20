@@ -261,6 +261,12 @@ a hover {
   stroke-width: 1.5px;
 }
 
+.lineNoChrome {
+  fill: none;
+  stroke: green;
+  stroke-width: 1.5px;
+}
+
 .axis path,
 .axis line {
     fill: none;
