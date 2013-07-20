@@ -261,8 +261,8 @@ a hover {
   stroke-width: 1.5px;
 }
 
-.lineNoChrome {
-  fill: none;
+.lineFillGradNoChrome {
+  fill: green;
   stroke: green;
   stroke-width: 1.5px;
 }
