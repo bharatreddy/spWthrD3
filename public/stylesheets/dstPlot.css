@@ -37,6 +37,19 @@ a hover {
   -o-user-select: none;
 }
 
+.yearVals-nav {
+  position: absolute;
+  bottom: 1110px;
+  left: 510px;
+  width: 240px;
+  height: 34px;
+  color: #F5FBEF;
+}
+
+.yearVals-nav select {
+   font-size: 16px;
+   }
+
 
 .swDst {
   position: absolute;
