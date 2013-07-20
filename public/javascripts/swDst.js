@@ -68,14 +68,10 @@ window.onload = function () {
       .y(function(d) { return y(d.dst); });
 
   var line2 = d3.svg.line()
-    .interpolate("monotone")
+    .interpolate("basis")
       .x(function(d) { return x2(d.date); })
       .y(function(d) { return y2(d.dst); });
 
-
-  var n = 0 // num of layers
-  var color = d3.scale.linear()
-      .range(["#aad", "#556"]);
 
   var area2 = d3.svg.area()
       .interpolate("monotone")
@@ -89,7 +85,12 @@ window.onload = function () {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom);
 
-
+  
+  svg.append("defs").append("clipPath")
+    .attr("id", "clip")
+  .append("rect")
+    .attr("width", width)
+    .attr("height", height);
 
   var userAgent = navigator.userAgent.toString().toLowerCase();
   var browserChromeIndex = userAgent.indexOf('chrome')
@@ -157,12 +158,12 @@ window.onload = function () {
       focus.append("path")
           .datum(datDst)
           .attr("clip-path", "url(#clip)")
-          .attr("class", "line")
+          .attr("class", "lineFillGrad")
           .attr("d", line);
     } else {focus.append("path")
           .datum(datDst)
           .attr("clip-path", "url(#clip)")
-          .attr("class", "lineNoChrome")
+          .attr("class", "lineFillGradNoChrome")
           .attr("d", line);
     }
    
@@ -171,9 +172,6 @@ window.onload = function () {
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-    focus.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);
 
     focus.append("g")
         .attr("class", "y axis")
@@ -226,11 +224,11 @@ window.onload = function () {
     // focusmouse.append("circle")
     //           .attr("r", 5); 
 
-    focusmouse.append("text")
-        .attr("width", 1)
-        .attr("height", 5)
-        .attr("x", 9)
-        .attr("dy", ".35em");
+    // focusmouse.append("text")
+    //     .attr("width", 1)
+    //     .attr("height", 5)
+    //     .attr("x", 9)
+    //     .attr("dy", ".35em");
 
     svg.append("rect")
         .attr("class", "overlay")
@@ -257,11 +255,6 @@ window.onload = function () {
         .attr("y", -6)
         .attr("height", height2 + 7);
 
-
-    var lineFunc = d3.svg.line()
-        .x(function(d) { return d.date; })
-        .y(function(d) { return d.dst; })
-        .interpolate("linear");
 
     var bisectDate = d3.bisector(function(d) { return d.date; }).left;
 
@@ -294,7 +287,6 @@ window.onload = function () {
       x.domain(brush.empty() ? x2.domain() : brush.extent());
       focus.select("path").attr("d", line);
       focus.select(".x.axis").call(xAxis);
-      focus.select(".y.axis").call(yAxis);
 
     }
 
