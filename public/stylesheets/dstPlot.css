@@ -25,7 +25,22 @@ a hover {
   position: absolute;
   font-size: 25px;
   color: #F5FBEF;
-  bottom: 1200px;
+  bottom: 1100px;
+  left: 300px;
+  text-align: left;
+  vertical-align: top;
+  width: 500px;
+  height: 50px;
+  -moz-user-select: none; 
+  -khtml-user-select: none; 
+  -webkit-user-select: none; 
+  -o-user-select: none;
+}
+
+
+.swDst {
+  position: absolute;
+  bottom: 650px;
   left: 300px;
   text-align: left;
   vertical-align: top;
@@ -233,6 +248,8 @@ g text {
 }
 
 
+
+
 .left-content {
   display: none;
   position: absolute;
@@ -269,6 +286,6 @@ footer {
   color: #087EF3; 	
   position: absolute;
   text-align: left;
-  bottom: 275px;
+  bottom: 175px;
   left: 325px;
 }

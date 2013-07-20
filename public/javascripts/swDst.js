@@ -45,7 +45,7 @@ var line = d3.svg.line()
     .y(function(d) { return y(d.dst); });
 
 var line2 = d3.svg.line()
-	.interpolate("monotone")
+  .interpolate("monotone")
     .x(function(d) { return x2(d.date); })
     .y(function(d) { return y2(d.dst); });
 
@@ -98,7 +98,7 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       if (!error) {
           var data = JSON.parse(xhrRes.response);
       } else {
-      	  console.log('here');
+          console.log('here');
           console.log(error);
       }
 
@@ -114,10 +114,10 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
      //  datDst.forEach(function(d) {
      //      d.date = parseDate(d.time);
      //      d.dst = +d.dst;
-  	  // });
+      // });
 
   x.domain(d3.extent(datDst.map(function(d) { return d.date; })));
-  y.domain([d3.min(datDst.map(function(d) { return d.dst; })), 100]);
+  y.domain([d3.min(datDst.map(function(d) { return d.dst; })), d3.max(datDst.map(function(d) { return d.dst; }))]);
   x2.domain(x.domain());
   y2.domain(y.domain());
 
@@ -152,14 +152,18 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .style("display", "none");
 
 
-  focusmouse.append("line")
-       .attr("stroke", "green")
-       .attr("stroke-width", 3)
-       .attr("y1", 300)
-       .attr("y2", -100);
+  // focusmouse.append("line")
+  //      .attr("stroke", "green")
+  //      .attr("stroke-width", 3)
+  //      .attr("y1", 300)
+  //      .attr("y2", -100);
   
+  focusmouse.append("circle")
+            .attr("r", 5); 
 
   focusmouse.append("text")
+      .attr("width", 1)
+      .attr("height", 5)
       .attr("x", 9)
       .attr("dy", ".35em");
 
@@ -205,8 +209,10 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
     
 
+   var formatDate = d3.time.format("%m/%d/%Y,%H");
+   
    focusmouse.attr("transform", "translate(" + x(d.date) + "," + 90 + ")");
-   focusmouse.select("text").text("Dst : " + String(d.dst) + " nT, date : " + d.date );
+   focusmouse.select("text").text("Dst : " + String(d.dst) + " nT, date : " + formatDate(d.date) + " UT" );
     
 
   }
@@ -218,14 +224,13 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
 
 });
 
-	function brushed() {
+  function brushed() {
 
-	  x.domain(brush.empty() ? x2.domain() : brush.extent());
-	  focus.select("path").attr("d", line);
-	  focus.select(".x.axis").call(xAxis);
-	}
+    x.domain(brush.empty() ? x2.domain() : brush.extent());
+    focus.select("path").attr("d", line);
+    focus.select(".x.axis").call(xAxis);
+    focus.select(".y.axis").call(yAxis);
+
+  }
 
 }
-
-
-
