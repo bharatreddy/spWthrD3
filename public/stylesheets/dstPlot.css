@@ -40,6 +40,7 @@ a hover {
 
 .swDst {
   position: absolute;
+  z-index: 10;
   bottom: 650px;
   left: 300px;
   text-align: left;
@@ -51,6 +52,45 @@ a hover {
   -webkit-user-select: none; 
   -o-user-select: none;
 }
+
+
+
+.plot1Desc {
+  position: absolute;
+  bottom: 600px;
+  left: 1300px;
+  text-align: left;
+  vertical-align: top;
+  width: 250px;
+  height: 50px;  
+  color: #087EF3;
+  font-size: 15px;
+}
+
+.plot2Desc {
+  position: absolute;
+  bottom: 200px;
+  left: 1300px;
+  text-align: left;
+  vertical-align: top;
+  width: 250px;
+  height: 50px;  
+  color: crimson;
+  font-size: 20px;
+}
+
+.dstValPrint {
+  position: absolute;
+  bottom: 625px;
+  left: 400px;
+  text-align: left;
+  vertical-align: top;
+  width: 250px;
+  height: 50px;  
+  color: #F5FBEF;
+  font-size: 12px;
+}
+
 
 .content {
   width: 1400px;

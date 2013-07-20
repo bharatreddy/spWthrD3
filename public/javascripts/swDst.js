@@ -60,6 +60,7 @@ var area2 = d3.svg.area()
     .y0(height2)
     .y1(function(d) { return y2(d.dst); });
 
+
 d3.select(".swDst").selectAll("svg").remove();
 var svg = d3.select(".swDst").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -155,11 +156,37 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
   // focusmouse.append("line")
   //      .attr("stroke", "green")
   //      .attr("stroke-width", 3)
-  //      .attr("y1", 300)
+  //      .attr("y1", 50)
   //      .attr("y2", -100);
   
-  focusmouse.append("circle")
-            .attr("r", 5); 
+
+
+  svg.append("svg:defs").selectAll("marker")
+    .data(["suit", "licensing", "resolved"])
+  .enter().append("svg:marker")
+    .attr("id", 'MarkerId')
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 5)
+    .attr("refY", 0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+  .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", "#F5FBEF");
+
+
+
+  focusmouse.append("line")
+       .attr("stroke", "#F5FBEF")
+       .style("stroke-dasharray", ("3, 3"))
+       .attr("stroke-width", 1)
+       .attr("y1", 200)
+       .attr("y2", 305)
+       .attr("marker-end", "url(#MarkerId)");
+  
+  // focusmouse.append("circle")
+  //           .attr("r", 5); 
 
   focusmouse.append("text")
       .attr("width", 1)
@@ -172,7 +199,7 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
       .attr("width", width)
       .attr("height", height)
       .on("mouseover", function() { focusmouse.style("display", null); })
-      .on("mouseout", function() { focusmouse.style("display", "none"); })
+      .on("mouseout", function() { focusmouse.style("display", "none");d3.select(".dstValPrint").text("Hover your mouse on the big plot to print data.") })
       .on("mousemove", mousemove);
 
   context.append("path")
@@ -209,11 +236,11 @@ d3.xhr("/dstDb?sdt="+allDataDtStrt+"&edt="+allDataDtEnd
         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
     
 
-   var formatDate = d3.time.format("%m/%d/%Y,%H");
+   var formatDate = d3.time.format("%m/%d/%Y, %H");
    
    focusmouse.attr("transform", "translate(" + x(d.date) + "," + 90 + ")");
-   focusmouse.select("text").text("Dst : " + String(d.dst) + " nT, date : " + formatDate(d.date) + " UT" );
-    
+   //focusmouse.select("text").text("Dst : " + String(d.dst) + " nT, date : " + formatDate(d.date) + " UT" );
+   d3.select(".dstValPrint").text("Dst : " + String(d.dst) + " nT, date : " + formatDate(d.date) + " UT" );
 
   }
 
