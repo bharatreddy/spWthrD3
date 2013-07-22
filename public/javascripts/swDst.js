@@ -59,15 +59,15 @@ window.onload = function () {
         .y0(function(d) { return y(0); })
         .y1(function(d) { return y(d.dst); });
 
-    var line = d3.svg.line()
-        .interpolate("basis")
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.dst); });
+    // var line = d3.svg.line()
+    //     .interpolate("basis")
+    //     .x(function(d) { return x(d.date); })
+    //     .y(function(d) { return y(d.dst); });
 
-    var line2 = d3.svg.line()
-      .interpolate("basis")
-        .x(function(d) { return x2(d.date); })
-        .y(function(d) { return y2(d.dst); });
+    // var line2 = d3.svg.line()
+    //   .interpolate("basis")
+    //     .x(function(d) { return x2(d.date); })
+    //     .y(function(d) { return y2(d.dst); });
 
     var area2 = d3.svg.area()
         .interpolate("monotone")
@@ -90,21 +90,6 @@ window.onload = function () {
 
     var userAgent = navigator.userAgent.toString().toLowerCase();
     var browserChromeIndex = userAgent.indexOf('chrome')
-  
-    svg.append("linearGradient")
-          .attr("id", "temperature-gradient")
-          .attr("gradientUnits", "userSpaceOnUse")
-          .attr("x1", "0%").attr("y1", "0%")
-          .attr("x2", "0%").attr("y2", "65%")
-        .selectAll("stop")
-          .data([
-            {offset: "0%", color: "green"},
-            {offset: "50%", color: "yellow"},
-            {offset: "100%", color: "red"}
-          ])
-        .enter().append("stop")
-          .attr("offset", function(d) { return d.offset; })
-          .attr("stop-color", function(d) { return d.color; });
 
     var focus = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -142,6 +127,21 @@ window.onload = function () {
       y.domain([d3.min(datDst.map(function(d) { return d.dst; })), d3.max(datDst.map(function(d) { return d.dst; }))]);
       x2.domain(x.domain());
       y2.domain(y.domain());
+  
+      svg.append("linearGradient")
+            .attr("id", "temperature-gradient")
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", "0%").attr("y1", y(0))
+            .attr("x2", "0%").attr("y2", y(-75))
+          .selectAll("stop")
+            .data([
+              {offset: "0%", color: "green"},
+              {offset: "50%", color: "yellow"},
+              {offset: "100%", color: "red"}
+            ])
+          .enter().append("stop")
+            .attr("offset", function(d) { return d.offset; })
+            .attr("stop-color", function(d) { return d.color; });
 
       if ( browserChromeIndex != -1) {
         focus.append("path")
@@ -156,7 +156,6 @@ window.onload = function () {
              .attr("class", "lineFillGradNoChrome")
              .attr("d", area);
       }
-
 
       $('#loading').fadeOut('fast');
      
