@@ -20,10 +20,17 @@ window.onload = function () {
   var allDataDtStrt = new Date(strStartDate);
   var allDataDtEnd = new Date(strEndDate);
 
+  $(".header").width(window.innerWidth*.95);
+  $(".content").width(window.innerWidth*.95);
+  $("footer").width(window.innerWidth*.95);
+
   loadPlotDstData(allDataDtStrt, allDataDtEnd);
 
 
   function loadPlotDstData(allDataDtStrt, allDataDtEnd) {  
+
+
+    $('#loading').fadeIn('slow');
 
     var margin = {top: 10, right: 10, bottom: 100, left: 40},
         margin2 = {top: 430, right: 10, bottom: 20, left: 40}, 
@@ -70,14 +77,16 @@ window.onload = function () {
 
     d3.select(".swDst").selectAll("svg").remove();
     var svg = d3.select(".swDst").append("svg")
-        .attr("width", width + margin.left + margin.right)
+        // .attr("width", width + margin.left + margin.right)
+        .attr("width", "100%")
         .attr("height", height + margin.top + margin.bottom);
     
     svg.append("defs").append("clipPath")
-      .attr("id", "clip")
+        .attr("id", "clip")
     .append("rect")
-      .attr("width", width)
-      .attr("height", height);
+        // .attr("width", width)
+        .attr("width", "100%")
+        .attr("height", height);
 
     var userAgent = navigator.userAgent.toString().toLowerCase();
     var browserChromeIndex = userAgent.indexOf('chrome')
@@ -147,6 +156,9 @@ window.onload = function () {
              .attr("class", "lineFillGradNoChrome")
              .attr("d", line);
       }
+
+
+      $('#loading').fadeOut('fast');
      
       focus.append("g")
           .attr("class", "x axis")
@@ -208,7 +220,8 @@ window.onload = function () {
       svg.append("rect")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
           .attr("class", "overlay")
-          .attr("width", width)
+          // .attr("width", width)
+          .attr("width", "100%")
           .attr("height", height)
           .on("mouseover", function() { focusmouse.style("display", null); })
           .on("mouseout", function() { focusmouse.style("display", "none");

@@ -3,7 +3,7 @@ body {
   color: #888;
   font: 13px Helvetica, arial, freesans, clean, sans-serif;
   line-height: 1.4;
-  min-width: 960px;
+  min-width: 980px;
   min-height: 800px;
   text-align: center;
 }
@@ -76,7 +76,7 @@ a hover {
   /*left: 5%;*/
   text-align: left;
   /*vertical-align: top;*/
-  /*width: 100%;*/
+  width: 75%;
   /*height: 80%;*/
   /*padding-left: 5%;*/
   -moz-user-select: none; 
@@ -128,9 +128,9 @@ a hover {
 }
 
 #loading {
-  top: 50%;
+  top: 20%;
   position: fixed;
-  left: 390px;
+  left: 500px;
   text-align: center;
   background-color: rgba(30,30,30,0.5);
   color: #fff;
@@ -139,8 +139,8 @@ a hover {
 }
 
 #loading img {
-  width: 20px;
-  height: 20px;
+  width: 150px;
+  height: 150px;
 }
 
 .dates {
