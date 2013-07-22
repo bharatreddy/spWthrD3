@@ -5,6 +5,7 @@ body {
   line-height: 1.4;
   min-width: 960px;
   min-height: 800px;
+  text-align: center;
 }
 
 h3 {
@@ -21,18 +22,27 @@ a hover {
   color: MediumVioletRed;
 }
 
+.header{
+  position: relative;
+  /*width: 960px;*/
+  /*left: 50%;*/
+  /*margin-left: -480px;*/
+  text-align: center;
+  display: inline-block;
+}
+
 .title {
   /*position: absolute;*/
   font-size: 25px;
   color: #F5FBEF;
-  top: 20px;
-  left: 20%;
-  text-align: left;
+/*  top: 20px;
+  left: 20%;*/
+  /*text-align: left;*/
   vertical-align: top;
-  width: 50%;
+/*  width: 50%;
   height: 5%;
   padding-top: 3%;
-  padding-left: 25%;
+  padding-left: 25%;*/
   -moz-user-select: none; 
   -khtml-user-select: none; 
   -webkit-user-select: none; 
@@ -40,89 +50,81 @@ a hover {
 }
 
 .yearVals-nav {
-  position: absolute;
-  top: 50px;
-  left: 42%;
-  width: 6%;
-  height: 5%;
-  padding-top: 0%;
-  padding-left: 0%;
+  position: relative;
+  top: 5px;
+  left: 5px;
+  /*width: 6%;*/
+  /*height: 5%;*/
+  /*padding-top: 0%;*/
+  /*padding-left: 0%;*/
   color: #F5FBEF;
+  font-size: 16px;
 }
 
-.yearVals-nav select {
-   font-size: 16px;
-   }
-
+.content {
+  width: 95%;
+  position: relative;
+  /*left: 50%;*/
+  /*margin-left: -480px;*/
+  display: inline-block;
+}
 
 .swDst {
-/*  position: absolute; */
+  position: absolute; 
   z-index: 10;
   top: 10px;
-  left: 5%;
+  /*left: 5%;*/
   text-align: left;
-  vertical-align: top;
-  width: 100%;
-  height: 80%;
-  padding-left: 5%;
+  /*vertical-align: top;*/
+  /*width: 100%;*/
+  /*height: 80%;*/
+  /*padding-left: 5%;*/
   -moz-user-select: none; 
   -khtml-user-select: none; 
   -webkit-user-select: none; 
   -o-user-select: none;
 }
 
-
-
 .plot1Desc {
   position: absolute;
   top: 25px;
-  left: 125%;
-  text-align: left;
+  left: 75%;
+  text-align: justify;
   vertical-align: top;
-  width: 20%;
+  width: 25%;
   height: 80%;
-  padding-left: 0%;
-  margin-left: -480px;
-  padding-top: 5%;
+  /*padding-left: 0%;*/
+  /*margin-left: -480px;*/
+  /*padding-top: 5%;*/
   color: #087EF3;
   font-size: 15px;
 }
 
 .plot2Desc {
   position: absolute;
-  top: 525px;
-  left: 125%;
+  top: 450px;
+  left: 75%;
   text-align: left;
   vertical-align: top;
-  width: 20%;
+  width: 25%;
   height: 10%;  
-  padding-left: 0%;
-  margin-left: -480px;
-  padding-top: 0%;
+  /*padding-left: 0%;*/
+  /*margin-left: -480px;*/
+  /*padding-top: 0%;*/
   color: crimson;
   font-size: 16px;
 }
 
 .dstValPrint {
   position: absolute;
-  top: 12.5%;
-  left: 15%;
+  top: 25px;
+  left: 5%;
   text-align: left;
   vertical-align: top;
-  width: 30%;
-  height: 2%;  
+  /*width: 30%;*/
+  /*height: 2%;  */
   color: #F5FBEF;
   font-size: 12px;
-}
-
-
-.content {
-  width: 100%;
-  height: 100%;
-  text-align: left;
-  /*position: absolute;*/
-  left: 20%;
-  top: 50%
 }
 
 #loading {
@@ -141,36 +143,6 @@ a hover {
   height: 20px;
 }
 
-.tabnav {
-  margin: 10px 0;
-  border-bottom: 1px solid #555;
-  height: 35px;
-  text-align: right;
-  position: relative;
-  z-index: 1;
-  -moz-user-select: none; 
-  -khtml-user-select: none; 
-  -webkit-user-select: none; 
-  -o-user-select: none;
-}
-
-.tabnav-tabs li{
-  display: inline-block;
-  padding: 8px 12px;
-  margin-bottom: -1px;
-  border: 1px solid transparent;
-  border-bottom: 0;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.tabnav-tabs .selected {
-  border-color: #555;
-  border-radius: 3px 3px 0 0;
-  background-color: #555;
-  color: #000;
-}
-
 .dates {
   position: absolute;
   left: 0px;
@@ -181,23 +153,6 @@ a hover {
   font-size: 15px;
 }
 
-.dtnav {
-  height: 20px;
-  display: inline-block;
-}
-
-.dtnav img {
-  height: 20px;
-  cursor: pointer;
-}
-
-#dt {
-  height: 20px;
-  display: inline-block;
-  position: relative;
-  top: -4px;
-}
-
 .times {
   text-align: center;
 }
@@ -205,61 +160,6 @@ a hover {
 #svgts {
   padding: 20px;
   padding-top: 1px;
-}
-
-.data {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  font-size: 14px;
-  text-align: right;
-  display: none;
-  padding: 5px;
-  border-radius: 3px;
-}
-
-.data .hover {
-  font-size: 16px;
-  color: #aaa;
-}
-
-.stroke {
-  fill: none;
-  stroke: #000;
-  stroke-width: 3px;
-}
-
-.fill {
-  fill: #fff;
-}
-
-.graticule {
-  fill: none;
-  stroke: #222;
-  stroke-width: .5px;
-  stroke-opacity: .5;
-}
-
-.land {
-  fill: #777;
-}
-
-.boundary {
-  fill: none;
-  stroke: #fff;
-  stroke-width: .5px;
-}
-
-.area-scraftA {
-  color: crimson;
-  fill: crimson;
-  fill-opacity: 0.7;
-}
-
-.area-scraftB {
-  color: steelblue;
-  fill: steelblue;
-  fill-opacity: 0.7;
 }
 
 .brush-fill {
@@ -299,10 +199,6 @@ g text {
     padding-bottom: 20px;
 }
 
-.circles-scraftA {
-  fill: crimson;
-}
-
 .overlay {
   fill: none;
   pointer-events: all;
@@ -313,49 +209,12 @@ g text {
   stroke: steelblue;
 }
 
-.circles-scraftB {
-  fill: steelblue;
-}
-
-
-
-
-.left-content {
-  display: none;
-  position: absolute;
-  max-width: 800px;
-  top: 5%;
-  right: 5%;
-  bottom: 5%;
-  text-align: left;
-  padding: 10px;
-  background-color: rgba(60,60,70,0.98);
-  height: 90%;
-  overflow-y: scroll;
-  font-size: 14px;
-  border-radius: 3px;
-  border: 1px solid #888;
-  z-index: 10;
-}
-
-.left-content-control {
-  margin-right: 5px;
-  padding: 5px;
-  font-size: 14px;
-  border-radius: 3px 3px 0 0;
-  background-color: rgba(60,60,70,0.3);
-  cursor: pointer;
-  z-index: -1;
-  -moz-user-select: none; 
-  -khtml-user-select: none; 
-  -webkit-user-select: none; 
-  -o-user-select: none;
-}
-
 footer {
-  color: #087EF3; 	
-  position: absolute;
+  color: #087EF3;   
+  position: relative;
   text-align: left;
-  top: 625px;
-  left: 125px;
+  top: 530px;
+  /*left: 50%;*/
+  /*margin-left: -480px;*/
+  display: inline-block;
 }
