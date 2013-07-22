@@ -3,7 +3,7 @@ body {
   color: #888;
   font: 13px Helvetica, arial, freesans, clean, sans-serif;
   line-height: 1.4;
-  min-width: 900px;
+  min-width: 960px;
   min-height: 800px;
 }
 
@@ -22,15 +22,17 @@ a hover {
 }
 
 .title {
-  position: absolute;
+  /*position: absolute;*/
   font-size: 25px;
   color: #F5FBEF;
-  bottom: 1100px;
-  left: 300px;
+  top: 20px;
+  left: 20%;
   text-align: left;
   vertical-align: top;
-  width: 500px;
-  height: 50px;
+  width: 50%;
+  height: 5%;
+  padding-top: 3%;
+  padding-left: 25%;
   -moz-user-select: none; 
   -khtml-user-select: none; 
   -webkit-user-select: none; 
@@ -39,10 +41,12 @@ a hover {
 
 .yearVals-nav {
   position: absolute;
-  bottom: 1110px;
-  left: 510px;
-  width: 240px;
-  height: 34px;
+  top: 50px;
+  left: 42%;
+  width: 6%;
+  height: 5%;
+  padding-top: 0%;
+  padding-left: 0%;
   color: #F5FBEF;
 }
 
@@ -52,14 +56,15 @@ a hover {
 
 
 .swDst {
-  position: absolute;
+/*  position: absolute; */
   z-index: 10;
-  bottom: 650px;
-  left: 300px;
+  top: 10px;
+  left: 5%;
   text-align: left;
   vertical-align: top;
-  width: 500px;
-  height: 50px;
+  width: 100%;
+  height: 80%;
+  padding-left: 5%;
   -moz-user-select: none; 
   -khtml-user-select: none; 
   -webkit-user-select: none; 
@@ -70,48 +75,54 @@ a hover {
 
 .plot1Desc {
   position: absolute;
-  bottom: 600px;
-  left: 1300px;
+  top: 25px;
+  left: 125%;
   text-align: left;
   vertical-align: top;
-  width: 250px;
-  height: 50px;  
+  width: 20%;
+  height: 80%;
+  padding-left: 0%;
+  margin-left: -480px;
+  padding-top: 5%;
   color: #087EF3;
   font-size: 15px;
 }
 
 .plot2Desc {
   position: absolute;
-  bottom: 200px;
-  left: 1300px;
+  top: 525px;
+  left: 125%;
   text-align: left;
   vertical-align: top;
-  width: 250px;
-  height: 50px;  
+  width: 20%;
+  height: 10%;  
+  padding-left: 0%;
+  margin-left: -480px;
+  padding-top: 0%;
   color: crimson;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .dstValPrint {
   position: absolute;
-  bottom: 650px;
-  left: 400px;
+  top: 12.5%;
+  left: 15%;
   text-align: left;
   vertical-align: top;
-  width: 250px;
-  height: 50px;  
+  width: 30%;
+  height: 2%;  
   color: #F5FBEF;
   font-size: 12px;
 }
 
 
 .content {
-  width: 1400px;
-  height: 1200px;
+  width: 100%;
+  height: 100%;
   text-align: left;
-  position: absolute;
+  /*position: absolute;*/
   left: 20%;
-  bottom: -40%
+  top: 50%
 }
 
 #loading {
@@ -345,6 +356,6 @@ footer {
   color: #087EF3; 	
   position: absolute;
   text-align: left;
-  bottom: 175px;
-  left: 325px;
+  top: 625px;
+  left: 125px;
 }
