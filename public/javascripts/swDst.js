@@ -188,6 +188,7 @@ window.onload = function () {
         .attr("fill", "#F5FBEF");
 
       focusmouse.append("line")
+           .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
            .attr("stroke", "#F5FBEF")
            .style("stroke-dasharray", ("3, 3"))
            .attr("stroke-width", 1)
@@ -205,6 +206,7 @@ window.onload = function () {
       //     .attr("dy", ".35em");
 
       svg.append("rect")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
           .attr("class", "overlay")
           .attr("width", width)
           .attr("height", height)
