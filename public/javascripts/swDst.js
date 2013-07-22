@@ -20,9 +20,9 @@ window.onload = function () {
   var allDataDtStrt = new Date(strStartDate);
   var allDataDtEnd = new Date(strEndDate);
 
-  $(".header").width(window.innerWidth*.95);
-  $(".content").width(window.innerWidth*.95);
-  $("footer").width(window.innerWidth*.95);
+  $(".header").width($("body").width());
+  $(".content").width($("body").width());
+  $("footer").width($("body").width());
 
   loadPlotDstData(allDataDtStrt, allDataDtEnd);
 
@@ -56,7 +56,7 @@ window.onload = function () {
     var area = d3.svg.area()
         .interpolate("monotone")
         .x(function(d) { return x(d.date); })
-        .y0(height)
+        .y0(function(d) { return y(0); })
         .y1(function(d) { return y(d.dst); });
 
     var line = d3.svg.line()
@@ -72,7 +72,7 @@ window.onload = function () {
     var area2 = d3.svg.area()
         .interpolate("monotone")
         .x(function(d) { return x2(d.date); })
-        .y0(height2)
+        .y0(function(d) { return y2(0); })
         .y1(function(d) { return y2(d.dst); });
 
     d3.select(".swDst").selectAll("svg").remove();
@@ -148,13 +148,13 @@ window.onload = function () {
              .datum(datDst)
              .attr("clip-path", "url(#clip)")
              .attr("class", "lineFillGrad")
-             .attr("d", line);
+             .attr("d", area);
       } else {
         focus.append("path")
              .datum(datDst)
              .attr("clip-path", "url(#clip)")
              .attr("class", "lineFillGradNoChrome")
-             .attr("d", line);
+             .attr("d", area);
       }
 
 
@@ -230,7 +230,7 @@ window.onload = function () {
 
       context.append("path")
           .datum(datDst)
-          .attr("d", line2)
+          .attr("d", area2)
           .style("fill", "crimson");
 
       context.append("g")
@@ -266,7 +266,7 @@ window.onload = function () {
 
     function brushed() {
       x.domain(brush.empty() ? x2.domain() : brush.extent());
-      focus.select("path").attr("d", line);
+      focus.select("path").attr("d", area);
       focus.select(".x.axis").call(xAxis);
     }
   }
