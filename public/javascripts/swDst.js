@@ -113,7 +113,9 @@ window.onload = function () {
       }
 
       var datDst = data.filter( function(d) {
-        d.date = new Date(d.time);
+      	locTimeDate = new Date( d.time );
+      	// convert date from local time to UT
+        d.date = new Date( locTimeDate.getTime() + locTimeDate.getTimezoneOffset() * 60000 );
         d.dst = +d.dst;
         return d
       });
