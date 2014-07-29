@@ -127,6 +127,7 @@ window.onload = function () {
 
       x.domain(d3.extent(datDst.map(function(d) { return d.date; })));
       y.domain([d3.min(datDst.map(function(d) { return d.dst; })), d3.max(datDst.map(function(d) { return d.dst; }))]);
+      // y.domain([-200., 25.]);
       x2.domain(x.domain());
       y2.domain(y.domain());
   
